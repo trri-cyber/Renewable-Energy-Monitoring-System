@@ -362,3 +362,11 @@ GitHub: https://github.com/trri-cyber
 # 📄 License
 
 This project was developed for educational purposes to demonstrate **Spring Boot Microservices**, **Spring Cloud Gateway**, **REST APIs**, and **MySQL** integration.
+<img width="1648" height="1800" alt="IMG-20250213-WA0007" src="https://github.com/user-attachments/assets/ebbe84f7-784d-4e5c-837d-4487ec94467f" />
+
+
+
+
+
+
+
