@@ -7,7 +7,6 @@ import com.example.windservice.service.WindTurbineService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,74 +23,73 @@ public class WindTurbineController {
     }
 
     @PostMapping
-    public ResponseEntity<WindTurbineResponse> registerWindTurbine(
+    @ResponseStatus(HttpStatus.CREATED)
+    public WindTurbineResponse registerWindTurbine(
             @Valid @RequestBody WindTurbineRequest request) {
 
         log.info("POST : Register Wind Turbine");
 
-        return new ResponseEntity<>(
-                service.registerWindTurbine(request),
-                HttpStatus.CREATED);
+        return service.registerWindTurbine(request);
     }
 
     @GetMapping
-    public ResponseEntity<List<WindTurbineResponse>> getAllWindTurbines() {
+    public List<WindTurbineResponse> getAllWindTurbines() {
 
         log.info("GET : Fetch All Wind Turbines");
 
-        return ResponseEntity.ok(service.getAllWindTurbines());
+        return service.getAllWindTurbines();
     }
+
     @GetMapping("/total-generated")
-    public ResponseEntity<Double> getTotalGeneratedEnergy() {
-        return ResponseEntity.ok(
-                service.getTotalGeneratedEnergy());
+    public Double getTotalGeneratedEnergy() {
+
+        return service.getTotalGeneratedEnergy();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WindTurbineResponse> getWindTurbineById(
+    public WindTurbineResponse getWindTurbineById(
             @PathVariable Long id) {
 
         log.info("GET : Fetch Wind Turbine {}", id);
 
-        return ResponseEntity.ok(service.getWindTurbineById(id));
+        return service.getWindTurbineById(id);
     }
 
     @GetMapping("/location/{location}")
-    public ResponseEntity<List<WindTurbineResponse>> getByLocation(
+    public List<WindTurbineResponse> getByLocation(
             @PathVariable String location) {
 
         log.info("GET : Fetch Wind Turbines by Location {}", location);
 
-        return ResponseEntity.ok(service.getWindTurbinesByLocation(location));
+        return service.getWindTurbinesByLocation(location);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WindTurbineResponse> updateWindTurbine(
+    public WindTurbineResponse updateWindTurbine(
             @PathVariable Long id,
             @Valid @RequestBody WindTurbineRequest request) {
 
         log.info("PUT : Update Wind Turbine {}", id);
 
-        return ResponseEntity.ok(
-                service.updateWindTurbine(id, request));
+        return service.updateWindTurbine(id, request);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteWindTurbine(
+    public String deleteWindTurbine(
             @PathVariable Long id) {
 
         log.info("DELETE : Delete Wind Turbine {}", id);
 
         service.deleteWindTurbine(id);
 
-        return ResponseEntity.ok("Wind Turbine Deleted Successfully");
+        return "Wind Turbine Deleted Successfully";
     }
-    @PutMapping("/{id}/generation")
-    public ResponseEntity<WindTurbineResponse> updateGeneration(
-            @PathVariable Long id,
-            @RequestBody @Valid GenerationRequest request) {
 
-        return ResponseEntity.ok(
-                service.updateGeneration(id, request));
+    @PutMapping("/{id}/generation")
+    public WindTurbineResponse updateGeneration(
+            @PathVariable Long id,
+            @Valid @RequestBody GenerationRequest request) {
+
+        return service.updateGeneration(id, request);
     }
 }
