@@ -154,7 +154,6 @@ Renewable-Energy-Monitoring-System
 ├── BatteryService
 ├── DistributionService
 │
-├── postman
 ├── screenshots
 ├── README.md
 └── .gitignore
